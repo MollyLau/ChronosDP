@@ -1,0 +1,49 @@
+{
+  "status": "complete",
+  "T": [
+    1,
+    10,
+    100,
+    500
+  ],
+  "w_over_T": [
+    5,
+    5.5,
+    10,
+    10.5,
+    50,
+    50.5
+  ],
+  "tau": [
+    1,
+    10,
+    100,
+    500
+  ],
+  "epsilon": [
+    0.5,
+    1,
+    2,
+    4,
+    10,
+    50,
+    100
+  ],
+  "delta": 1e-06,
+  "horizon_seconds": 86400,
+  "domain": "For each workload, all recorded calendar days in its selected full year, aligned to midnight. The finite reference domain and calibration are fixed before selecting a released day; all distinct days in that domain are adjacent.",
+  "privacy_unit": "One whole day. All publications and adaptive postprocessing queries for that day's mechanism share its total budget. No annual or person-level guarantee is asserted.",
+  "calibration": "Take the maximum over every pair of dates in the same workload, including different months. Never choose a noise scale using only the particular released day.",
+  "boundary": "Reset signal history and Brownian path at midnight. Query windows remain within the day. Source local-clock coordinates retained for travel data; UTC for USGS.",
+  "hard": "One independent Gaussian release per completed T-bin; N=floor(86400/T), epsilon/N and delta/N. Compute each (T,w) window-vector L1 maximum and verify it covers every published scalar bin difference. The final incomplete bin has no release.",
+  "brownian": "Compute the exact maximum smoothed-rate squared-difference integral over every within-day w-window and every pair of days, for each (w,tau). Cover the entire day when calibrating a continuous path; a window bound alone is not a whole-day privacy bound. Separate calibrated configurations must not be composed for free.",
+  "grid": "Same released Brownian path and noise scale as continuous; at time s return the cached increment with endpoints floor(s/T)T and (floor(s/T)-floor(w/T))T. No fresh off-grid information. Evaluate all three methods on the identical query set; additionally report on-grid queries separately.",
+  "metrics": "Per-day expected MSE and expected relative error on positive-truth queries; report zero-truth fraction separately. Macro average across days. All three methods appear in every comparison table and figure.",
+  "data": "Reuse retained original downloads and normalized monthly arrays. Preserve source hashes, daily arrays, all calibration witnesses, per-day metrics, and standalone plotting scripts with their input CSVs. No downloads needed.",
+  "days": 1463,
+  "daily_parameter_rows": 983136,
+  "macro_rows": 2688,
+  "integer_on_grid_rows": 491568,
+  "budgets_checked": true,
+  "integer_grid_equivalence_checked": true
+}
